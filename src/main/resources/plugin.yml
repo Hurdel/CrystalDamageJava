@@ -1,0 +1,8 @@
+name: CrystalDamage
+version: '${version}'
+main: tv.unsouled_ghost.crystaldamage.CrystalDamage
+api-version: 1.19
+commands:
+  crystaldamage:
+    description: changes the damage to the shield (0%-100%) from Endcrystalexplotions/query it
+    usage: /command set [percentage]/query
