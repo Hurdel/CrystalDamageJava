@@ -10,6 +10,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.inventory.meta.Damageable;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -44,7 +46,6 @@ public final class CrystalDamage extends JavaPlugin implements Listener {
                 while (myReader.hasNextLine()) {
                     String nextLine = myReader.nextLine();
                     if (nextLine.contains("CrystalDamage:")) {
-                        String[] filetext = nextLine.split(" ");
                         shielddamage = Integer.parseInt(nextLine.split(" ")[1]);
                     }
                 }
@@ -64,25 +65,27 @@ public final class CrystalDamage extends JavaPlugin implements Listener {
 
     @EventHandler
     private void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
-        if (event.getEntity() instanceof Player && ((Player) event.getEntity()).isBlocking()
-                && event.getDamager().getType() == EntityType.ENDER_CRYSTAL) {
-            Player player = (Player) event.getEntity();
-            if (player.getInventory().getItemInMainHand().getType() == Material.SHIELD) {
-                short newDurability = (short) (player.getInventory().getItemInMainHand().getDurability()
-                        + (Material.SHIELD.getMaxDurability() * (shielddamage / 100.0)));
-                player.getInventory().getItemInMainHand().setDurability(newDurability);
-                if (player.getInventory().getItemInMainHand().getDurability() >= Material.SHIELD.getMaxDurability()) {
-                    player.getInventory().setItemInMainHand(null);
+        if (event.getEntity() instanceof Player && ((Player) event.getEntity()).isBlocking() && event.getDamager().getType() == EntityType.ENDER_CRYSTAL) {
+            Player p = (Player) event.getEntity();
+            if (p.getInventory().getItemInMainHand().getType() == Material.SHIELD) {
+                Damageable itemdmg = (Damageable) p.getInventory().getItemInMainHand().getItemMeta();
+                short newDurability = (short) (itemdmg.getDamage() + (Material.SHIELD.getMaxDurability() * (shielddamage / 100.0)));
+                itemdmg.setDamage(newDurability);
+                p.getInventory().getItemInMainHand().setItemMeta((ItemMeta) itemdmg);
+                if (newDurability >= Material.SHIELD.getMaxDurability()) {
+                    p.getInventory().setItemInMainHand(null);
                 }
-            } else if (player.getInventory().getItemInOffHand().getType() == Material.SHIELD) {
-                short newDurability = (short) (player.getInventory().getItemInOffHand().getDurability()
-                        + (Material.SHIELD.getMaxDurability() * (shielddamage / 100.0)));
-                player.getInventory().getItemInOffHand().setDurability(newDurability);
-                if (player.getInventory().getItemInOffHand().getDurability() >= Material.SHIELD.getMaxDurability()) {
-                    player.getInventory().setItemInOffHand(null);
+            } else if (p.getInventory().getItemInOffHand().getType() == Material.SHIELD) {
+                Damageable itemdmg = (Damageable) p.getInventory().getItemInOffHand().getItemMeta();
+                short newDurability = (short) (itemdmg.getDamage() + (Material.SHIELD.getMaxDurability() * (shielddamage / 100.0)));
+                itemdmg.setDamage(newDurability);
+                p.getInventory().getItemInOffHand().setItemMeta((ItemMeta) itemdmg);
+                if (newDurability >= Material.SHIELD.getMaxDurability()) {
+                    p.getInventory().setItemInOffHand(null);
                 }
             }
-            event.setCancelled(true);
+            event.setDamage(0.0);
+//            event.setCancelled(true);
         }
     }
 
