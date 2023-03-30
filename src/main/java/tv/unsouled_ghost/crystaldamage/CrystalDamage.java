@@ -11,7 +11,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.meta.Damageable;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -32,7 +31,6 @@ public final class CrystalDamage extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(this, this);
         if (!new File("CrystalDamage.yml").exists()) {
             try {
-                new File("CrystalDamage.yml").createNewFile();
                 FileWriter myWriter = new FileWriter("CrystalDamage.yml");
                 myWriter.write("CrystalDamage: " + shielddamage);
                 myWriter.close();
@@ -65,13 +63,12 @@ public final class CrystalDamage extends JavaPlugin implements Listener {
 
     @EventHandler
     private void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
-        if (event.getEntity() instanceof Player && ((Player) event.getEntity()).isBlocking() && event.getDamager().getType() == EntityType.ENDER_CRYSTAL) {
-            Player p = (Player) event.getEntity();
+        if (event.getEntity() instanceof Player p && ((Player) event.getEntity()).isBlocking() && event.getDamager().getType() == EntityType.ENDER_CRYSTAL) {
             if (p.getInventory().getItemInMainHand().getType() == Material.SHIELD) {
                 Damageable itemdmg = (Damageable) p.getInventory().getItemInMainHand().getItemMeta();
                 short newDurability = (short) (itemdmg.getDamage() + (Material.SHIELD.getMaxDurability() * (shielddamage / 100.0)));
                 itemdmg.setDamage(newDurability);
-                p.getInventory().getItemInMainHand().setItemMeta((ItemMeta) itemdmg);
+                p.getInventory().getItemInMainHand().setItemMeta(itemdmg);
                 if (newDurability >= Material.SHIELD.getMaxDurability()) {
                     p.getInventory().setItemInMainHand(null);
                 }
@@ -79,7 +76,7 @@ public final class CrystalDamage extends JavaPlugin implements Listener {
                 Damageable itemdmg = (Damageable) p.getInventory().getItemInOffHand().getItemMeta();
                 short newDurability = (short) (itemdmg.getDamage() + (Material.SHIELD.getMaxDurability() * (shielddamage / 100.0)));
                 itemdmg.setDamage(newDurability);
-                p.getInventory().getItemInOffHand().setItemMeta((ItemMeta) itemdmg);
+                p.getInventory().getItemInOffHand().setItemMeta(itemdmg);
                 if (newDurability >= Material.SHIELD.getMaxDurability()) {
                     p.getInventory().setItemInOffHand(null);
                 }
@@ -125,14 +122,14 @@ public final class CrystalDamage extends JavaPlugin implements Listener {
             if (command.getName().equals("crystaldamage")) {
                 if (args.length == 1) {
                     return Arrays.asList("set", "query");
-                } else if (args.length == 2) {
-                    List<String> completions = new ArrayList<String>();
+                } else if (args.length == 2 && args[0].equals("set")) {
+                    List<String> intret = new ArrayList<>();
                     for (int i = 0; i < 100; i++) {
-                        completions.add(Integer.toString(i + 1));
+                        intret.add(Integer.toString(i + 1));
                     }
-                    return completions;
+                    return intret;
                 } else {
-                    return new ArrayList<String>();
+                    return new ArrayList<>();
                 }
             }
         }
