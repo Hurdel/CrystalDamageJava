@@ -1,8 +1,6 @@
 package tv.unsouled_ghost.crystaldamage;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
