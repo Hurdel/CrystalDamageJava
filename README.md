@@ -19,7 +19,7 @@ The Idea for this project came from this pluginrequest on the bukkit.org forums 
 *The commands can be only be used by the Players how are OP.*
 
 ## Licence:
-This Project is free to use, but linked to the original Author.
+This Project is free to use, but linked to the original Author would be nice.
 
 ## Author:
 * This Project was created by me alone
