@@ -51,7 +51,7 @@ public final class CrystalDamage extends JavaPlugin implements Listener {
                 }
                 myReader.close();
             } catch (FileNotFoundException e) {
-                Bukkit.getConsoleSender().sendMessage("§ccan't read the file!§r");
+                Bukkit.getConsoleSender().sendMessage(RED + "can't read the file!" + RESET);
                 e.printStackTrace();
             }
         }
@@ -105,13 +105,13 @@ public final class CrystalDamage extends JavaPlugin implements Listener {
                                 sender.sendMessage("The Damage from Endcrystals to Shields ist now set to " + shielddamage + "%");
                             }
                         } catch (Exception e) {
-                            sender.sendMessage(RED + "You can only use Intagers between 0 and 100!");
+                            sender.sendMessage(RED + "You can only use Intagers between 0 and 100!" + RESET);
                         }
                     } else {
-                        sender.sendMessage("/crystaldamage query " + RED + "to view the current value or\n" + WHITE + "/crystaldamage set [0-100] " + RED + "to set the value");
+                        sender.sendMessage("/crystaldamage query " + RED + "to view the current value or" + RESET + "\n/crystaldamage set [0-100] " + RED + "to set the value");
                     }
                 } else {
-                    sender.sendMessage(RED + "You don't have the permission to do this!");
+                    sender.sendMessage(RED + "You don't have the permission to do this!" + RESET);
                 }
             }
         }
