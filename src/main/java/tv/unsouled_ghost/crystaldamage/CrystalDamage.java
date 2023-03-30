@@ -85,7 +85,6 @@ public final class CrystalDamage extends JavaPlugin implements Listener {
                 }
             }
             event.setDamage(0.0);
-//            event.setCancelled(true);
         }
     }
 
