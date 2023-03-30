@@ -1,6 +1,8 @@
 package tv.unsouled_ghost.crystaldamage;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -21,6 +23,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+
+import static org.bukkit.ChatColor.*;
 
 public final class CrystalDamage extends JavaPlugin implements Listener {
 
@@ -49,7 +53,7 @@ public final class CrystalDamage extends JavaPlugin implements Listener {
                 }
                 myReader.close();
             } catch (FileNotFoundException e) {
-                Bukkit.getConsoleSender().sendMessage("§ccan't read the file!");
+                Bukkit.getConsoleSender().sendMessage("§ccan't read the file!§r");
                 e.printStackTrace();
             }
         }
@@ -103,13 +107,13 @@ public final class CrystalDamage extends JavaPlugin implements Listener {
                                 sender.sendMessage("The Damage from Endcrystals to Shields ist now set to " + shielddamage + "%");
                             }
                         } catch (Exception e) {
-                            sender.sendMessage("§cYou can only use Intagers between 0 and 100!§r");
+                            sender.sendMessage(RED + "You can only use Intagers between 0 and 100!");
                         }
                     } else {
-                        sender.sendMessage("§r/crystaldamage query §cto view the current value or§r\n/crystaldamage set [0-100] §cto set the value§r");
+                        sender.sendMessage("/crystaldamage query " + RED + "to view the current value or\n" + WHITE + "/crystaldamage set [0-100] " + RED + "to set the value");
                     }
                 } else {
-                    sender.sendMessage("§cYou don't have the permission to do this!§r");
+                    sender.sendMessage(RED + "You don't have the permission to do this!");
                 }
             }
         }
