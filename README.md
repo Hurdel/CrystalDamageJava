@@ -27,4 +27,3 @@ This Project is free to use, but linked to the original Author would be nice.
   * [YouTube](<https://www.youtube.com/@dontreal> "Don't Real")
   * [YouTube](<https://www.youtube.com/@master_of_spirit> "Master of Spirit")
 
-> The Projekt is written in Java.
