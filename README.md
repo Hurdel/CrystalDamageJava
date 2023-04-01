@@ -23,7 +23,3 @@ This Project is free to use, but linked to the original Author would be nice.
 
 ## Author:
 * This Project was created by me alone
-  * [Twitch](<https://www.twitch.tv/7_bag> "7_bag")
-  * [YouTube](<https://www.youtube.com/@dontreal> "Don't Real")
-  * [YouTube](<https://www.youtube.com/@master_of_spirit> "Master of Spirit")
-
